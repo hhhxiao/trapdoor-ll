@@ -50,8 +50,10 @@ jobs:
           path: ${{github.workspace}}/out
 
       #create release
-      - name: Release
-        run: 7z a release.zip ./out
+      - name: Prepare Release
+        run: 7z a release.zip ${{github.workspace}}/out
+
+      - name: Publish Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
