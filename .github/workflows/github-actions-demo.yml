@@ -4,11 +4,9 @@ jobs:
   Build:
     runs-on: windows-latest
     steps:
+      - uses: actions/checkout@v3
       - name: prepare
         run: |
           echo "Current path is ${{ github.workspace }}"
-          ls "."
           mkdir build
-          cd build
-          ls "."
-          
+          ls
