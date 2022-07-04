@@ -1,7 +1,7 @@
 name: GitHub Actions Demo
 on: [ push ]
 jobs:
-  Package:
+  Build:
     runs-on: windows-latest
     steps:
 
@@ -51,13 +51,15 @@ jobs:
 
       #create release
       - name: Prepare Release
-        run: 7z a release.zip ${{github.workspace}}/out
+        run: |
+          7z a release.zip ${{github.workspace}}/out
+          python create_release_node.py > release_node
 
       - name: Publish Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          body_path: ${{ github.workspace }}/changelog.md
+          body_path: ${{ github.workspace }}/release_node
           files: |
             release.zip
         env:
