@@ -5,6 +5,6 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: prepare
-        run: echo "Current path is ${{github.action_path}}"
-      - name: list dict
-        run: ls "${{github.action_path}}"
+        run: |
+          echo "Current path is ${{ github.workspace }}"
+          ls ${{github.workspace}}
