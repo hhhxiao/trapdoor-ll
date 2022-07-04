@@ -20,6 +20,7 @@ jobs:
 
       - name: Build Bedrock Library
         run: |
+          ls
           cd SDK/Tools
           LibraryBuilder.exe -o ..\Lib D:\BDS 
 
