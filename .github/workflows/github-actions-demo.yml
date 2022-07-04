@@ -4,13 +4,27 @@ jobs:
   Build:
     runs-on: windows-latest
     steps:
+      - name: Download Server
+        working-directory: ${{env.GITHUB_WORKSPACE}}
+        run: |
+          mkdir D:/BDS
+          ServerLink=$(cat 'LINK.txt')
+          curl -L -o D:/BDS/server.zip "$ServerLink"
+          unzip D:/BDS/server.zip -d D:/BDS > /dev/null
+        shell: bash
+
+      - name: Build Library
+        working-directory: ${{env.GITHUB_WORKSPACE}}
+        run: |
+          cd SDK/Tools
+          LibraryBuilder.exe -o ..\Lib D:\BDS 
+
       - uses: actions/checkout@v3
-      - name: prepare
+      - name: Check Status
         run: |
           echo "Current path is ${{ github.workspace }}"
           mkdir build
           ls
-          
 
       - name: Configure CMake
         run: cmake -B ${{github.workspace}}/build
