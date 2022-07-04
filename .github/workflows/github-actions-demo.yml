@@ -10,3 +10,7 @@ jobs:
           echo "Current path is ${{ github.workspace }}"
           mkdir build
           ls
+
+      - name: Configure cmake
+          working-directory: ${{github.workspace}}/build
+          run: cmake ..
