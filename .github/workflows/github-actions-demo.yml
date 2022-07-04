@@ -4,9 +4,8 @@ jobs:
   Package:
     runs-on: windows-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
+      - uses: actions/checkout@v3
+      
       - name: Pull submodule
         run: FetchSDK.cmd
         shell: cmd
