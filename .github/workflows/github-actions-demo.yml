@@ -23,7 +23,8 @@ jobs:
           ls
           ls SDK/Tools
           cd SDK/Tools
-          LibraryBuilder.exe -o ..\Lib D:\BDS 
+          LibraryBuilder.exe -o ..\Lib D:\BDS
+        shell: cmd
 
       - name: Check Status
         run: |
