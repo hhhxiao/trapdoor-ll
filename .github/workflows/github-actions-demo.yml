@@ -1,15 +1,18 @@
 name: GitHub Actions Demo
 on: [ push ]
 jobs:
-  Build:
+  Package:
     runs-on: windows-latest
     steps:
+      #download source code
       - uses: actions/checkout@v3
 
+      #Pull SDK
       - name: Pull submodule
         run: FetchSDK.cmd
         shell: cmd
 
+      #Download BDS
       - name: Download Server
         run: |
           mkdir D:/BDS
@@ -20,20 +23,28 @@ jobs:
 
       - name: Build Bedrock Library
         run: |
-          ls
-          ls SDK/Tools
           cd SDK/Tools
           LibraryBuilder.exe -o ..\Lib D:\BDS
         shell: cmd
 
-      - name: Check Status
-        run: |
-          echo "Current path is ${{ github.workspace }}"
-          mkdir build
-          ls
-
       - name: Configure CMake
-        run: cmake -B ${{github.workspace}}/build
+        run: cmake -B ${{github.workspace}}/build -DBETA=PFF -DDEV=OFF
 
       - name: Build
         run: cmake --build ${{github.workspace}}/build
+
+      - name: Compress
+        run: python make_release.py ./build/Debug 0
+
+      -name: Rename package
+        run: mv trapdoor-*.zip release.zip
+        bash: shell
+
+      - name: Upload Actions File
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: release
+          path: ${{github.workspace}}
+
+
+
