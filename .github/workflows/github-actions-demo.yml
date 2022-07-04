@@ -40,7 +40,7 @@ jobs:
           cp ./build/Debug/trapdoor*.dll ./out/plugins/
           cp ./src/base/config.json ./out/plugins/trapdoor/
           cp ./changelog.md ./out/
-          co ./README.md ./out
+          cp ./README.md ./out
         shell: bash
 
       - name: Upload Actions File
@@ -49,4 +49,12 @@ jobs:
           name: release-${{github.sha}}
           path: ${{github.workspace}}/out
 
-
+      #create release
+      - name: Release
+        run: 7z a release.zip ./out
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          body_path: ${{ github.workspace }}/changelog.md
+          files: |
+            release.zip
