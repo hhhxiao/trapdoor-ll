@@ -15,8 +15,7 @@ jobs:
           unzip D:/BDS/server.zip -d D:/BDS > /dev/null
         shell: bash
 
-      - name: Build Library
-        working-directory: ${{env.GITHUB_WORKSPACE}}
+      - name: Build Bedrock Library
         run: |
           cd SDK/Tools
           LibraryBuilder.exe -o ..\Lib D:\BDS 
