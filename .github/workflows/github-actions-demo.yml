@@ -46,7 +46,7 @@ jobs:
       - name: Upload Actions File
         uses: actions/upload-artifact@v1.0.0
         with:
-          name: release-${{github.sha}}
+          name: release
           path: ${{github.workspace}}/out
 
       #create release
@@ -60,3 +60,5 @@ jobs:
           body_path: ${{ github.workspace }}/changelog.md
           files: |
             release.zip
+        env:
+          GITHUB_REPOSITORY: hhhxiao/trapdoor-ll
