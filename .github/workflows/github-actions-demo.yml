@@ -4,15 +4,13 @@ jobs:
   Package:
     runs-on: windows-latest
     steps:
-      #download source code
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      #Pull SDK
       - name: Pull submodule
         run: FetchSDK.cmd
         shell: cmd
 
-      #Download BDS
       - name: Download Server
         run: |
           mkdir D:/BDS
