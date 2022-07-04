@@ -5,7 +5,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Pull submodule
         run: FetchSDK.cmd
         shell: cmd
@@ -33,9 +33,9 @@ jobs:
       - name: Compress
         run: python make_release.py ./build/Debug 0
 
-      -name: Rename package
+      - name: Rename package
         run: mv trapdoor-*.zip release.zip
-        bash: shell
+        shell: bash
 
       - name: Upload Actions File
         uses: actions/upload-artifact@v1.0.0
