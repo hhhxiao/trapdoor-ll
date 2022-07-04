@@ -24,7 +24,6 @@ def get_dll_file_path():
     return dlls[0]
 
 
-
 def create_zip(dll_name :str):
     version = dll_name[:-4]
     print("Version is %s" % version)
