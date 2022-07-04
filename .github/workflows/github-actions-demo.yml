@@ -5,8 +5,5 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: prepare
-        run: mkdir build && cd build
-      - name: cmake
-        run: cmake ..
-      - name: build
-        run: cmake --build .
+      - run: echo 'Current path is ${{github.action_path}}'
+      - run: ls ${{github.action_path}}
